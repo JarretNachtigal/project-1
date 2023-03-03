@@ -22,10 +22,11 @@ resource "azuread_user" "my_user" {
 
 # trainer's user
 resource "azuread_user" "trainer_user" {
-  user_principal_name = "ibrahim.ozbekler@someemail.com"
-  display_name        = "Ibrahim Ozbekler"
-  mail_nickname       = "iozbekler"
-  password            = "SecretP@sswd99!"
+  user_principal_name   = "ibrahim.ozbekler@someemail.com"
+  display_name          = "Ibrahim Ozbekler"
+  mail_nickname         = "iozbekler"
+  password              = "SecretP@sswd99!"
+  force_password_change = true
 }
 
 # 4 users from for_each
