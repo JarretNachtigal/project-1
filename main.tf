@@ -46,13 +46,29 @@ variable "display_names" {
   ["man.manson@someemail.com", "man manson", "mmanson", "passwd3"]]
 }
 
+variable "num_buckets" {
+  default = 2
+}
+
+resource "aws_s3_bucket" "b" {
+  count  = var.num_buckets
+  bucket = "my-tf-test-bucket-${count.index}"
+
+  tags = {
+    Name        = "My bucket${count.index}"
+    Environment = "Dev"
+  }
+}
+
 # done - my user
 # done - trainer user 
 # done - 4 for_each users
-# 2 s3 buckets
+# done - 2 s3 buckets
 # resource group  on azure with a 
 # - vm
 # - storage account
 # 2 tags
 # 1 output variable
-# variables where possible
+# 5 variables 
+
+# MOVE VARIABLES INTO variables.tf
