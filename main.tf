@@ -31,20 +31,24 @@ resource "azuread_user" "trainer_user" {
 
 # 4 users from for_each
 resource "azuread_user" "trainer_users_from_for_each" {
-  user_principal_name = "ibrahim.ozbekler@someemail.com"
-  display_name        = each.value
-  mail_nickname       = "iozbekler"
-  password            = "SecretP@sswd99!"
+  user_principal_name = each.value[0]
+  display_name        = each.value[1]
+  mail_nickname       = each.value[2]
+  password            = each.value[3]
   for_each            = toset(var.display_names)
 }
 
+# information for "trainer_users_from_for_each"
 variable "display_names" {
-  default = ["jon johnson", "tom Thomson", "bob bobson", "jan janson"]
+  default = [["jon.johnson@someemail.com", "jon johnson", "jjohnson", "passwd0"],
+    ["tom.thomson@someemail.com", "tom thomson", "tthomson", "passwd1"],
+    ["sam.samson@someemail.com", "sam samson", "ssamson", "passwd2"],
+  ["man.manson@someemail.com", "man manson", "mmanson", "passwd3"]]
 }
 
-# my user
-# trainer user 
-# 4 for_each users
+# done - my user
+# done - trainer user 
+# done - 4 for_each users
 # 2 s3 buckets
 # resource group  on azure with a 
 # - vm
