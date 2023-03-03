@@ -38,18 +38,6 @@ resource "azuread_user" "trainer_users_from_for_each" {
   for_each            = toset(var.display_names)
 }
 
-# information for "trainer_users_from_for_each"
-variable "display_names" {
-  default = [["jon.johnson@someemail.com", "jon johnson", "jjohnson", "passwd0"],
-    ["tom.thomson@someemail.com", "tom thomson", "tthomson", "passwd1"],
-    ["sam.samson@someemail.com", "sam samson", "ssamson", "passwd2"],
-  ["man.manson@someemail.com", "man manson", "mmanson", "passwd3"]]
-}
-
-variable "num_buckets" {
-  default = 2
-}
-
 resource "aws_s3_bucket" "b" {
   count  = var.num_buckets
   bucket = "my-tf-test-bucket-${count.index}"
@@ -60,11 +48,20 @@ resource "aws_s3_bucket" "b" {
   }
 }
 
+resource "azurerm_resource_group" "resource_group_1" {
+  name     = var.resource_group_name
+  location = "eastus"
+
+  tags = {
+    "name" = "resource-group-one"
+  }
+}
+
 # done - my user
 # done - trainer user 
 # done - 4 for_each users
 # done - 2 s3 buckets
-# resource group  on azure with a 
+# resource group on azure with a 
 # - vm
 # - storage account
 # 2 tags
