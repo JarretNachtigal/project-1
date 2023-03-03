@@ -18,6 +18,9 @@ resource "azuread_user" "my_user" {
   display_name        = var.my_name
   mail_nickname       = "jnachtigal"
   password            = "SecretP@sswd99!"
+  depends_on = [
+    azurerm_resource_group.resource_group_1
+  ]
 }
 
 # trainer's user
@@ -27,15 +30,19 @@ resource "azuread_user" "trainer_user" {
   mail_nickname         = "iozbekler"
   password              = "SecretP@sswd99!"
   force_password_change = true
+  depends_on = [
+    azurerm_resource_group.resource_group_1
+  ]
 }
 
 # 4 users from for_each
-resource "azuread_user" "trainer_users_from_for_each" {
-  user_principal_name = each.value[0]
-  display_name        = each.value[1]
-  mail_nickname       = each.value[2]
-  password            = each.value[3]
-  for_each            = toset(var.display_names)
+resource "aws_iam_user" "users_from_for_each" {
+  name = each.value
+  path = "/system/${each.value}"
+  depends_on = [
+    azurerm_resource_group.resource_group_1
+  ]
+  for_each = toset(var.display_names)
 }
 
 resource "aws_s3_bucket" "b" {
@@ -46,6 +53,10 @@ resource "aws_s3_bucket" "b" {
     Name        = "My bucket${count.index}"
     Environment = "Dev"
   }
+  depends_on = [
+    azuread_user.my_user,
+    azuread_user.trainer_user
+  ]
 }
 
 # resource group
@@ -142,6 +153,6 @@ resource "azurerm_storage_account" "storage_account_1" {
 # done - storage account
 # done - 2 tags
 # 1 output variable
-# 5 variables 
+# done - 5 variables 
 
 # MOVE VARIABLES INTO variables.tf
