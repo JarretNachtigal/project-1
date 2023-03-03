@@ -120,6 +120,19 @@ resource "azurerm_virtual_machine" "main" {
   }
 }
 
+# storage account
+resource "azurerm_storage_account" "storage_account_1" {
+  name                     = "mystorageaccount"
+  resource_group_name      = azurerm_resource_group.resource_group_1.name
+  location                 = azurerm_resource_group.resource_group_1.location
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+
+  tags = {
+    environment = "dev"
+  }
+}
+
 # done - my user
 # done - trainer user 
 # done - 4 for_each users
