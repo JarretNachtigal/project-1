@@ -105,6 +105,9 @@ resource "azurerm_virtual_machine" "main" {
   resource_group_name   = azurerm_resource_group.resource_group_1.name
   network_interface_ids = [azurerm_network_interface.main.id]
   vm_size               = "Standard_DS1_v2"
+  depends_on = [
+    azurerm_storage_account.storage_account_1
+  ]
 
   storage_image_reference {
     publisher = "Canonical"
@@ -142,6 +145,10 @@ resource "azurerm_storage_account" "storage_account_1" {
   tags = {
     environment = "dev"
   }
+
+  depends_on = [
+    aws_iam_user.users_from_for_each
+  ]
 }
 
 # done - my user
