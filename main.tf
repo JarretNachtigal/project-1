@@ -15,7 +15,7 @@ terraform {
 # my user
 resource "azuread_user" "my_user" {
   user_principal_name = "jarret.nachtigal@someemail.com"
-  display_name        = "Jarret Nachtigal"
+  display_name        = var.my_name
   mail_nickname       = "jnachtigal"
   password            = "SecretP@sswd99!"
 }
@@ -122,7 +122,7 @@ resource "azurerm_virtual_machine" "main" {
 
 # storage account
 resource "azurerm_storage_account" "storage_account_1" {
-  name                     = "mystorageaccount"
+  name                     = var.storage_account_name
   resource_group_name      = azurerm_resource_group.resource_group_1.name
   location                 = azurerm_resource_group.resource_group_1.location
   account_tier             = "Standard"
@@ -139,7 +139,7 @@ resource "azurerm_storage_account" "storage_account_1" {
 # done - 2 s3 buckets
 # resource group on azure with a 
 # done - vm
-# - storage account
+# done - storage account
 # done - 2 tags
 # 1 output variable
 # 5 variables 
