@@ -1,5 +1,7 @@
 # project-1
 
+This is my project for week 1 of devops
+
 Providers used
 AWS
 Azure
@@ -21,6 +23,9 @@ my-vm
 
 storage account provisioned
 storage_account_1
+
+output used
+value = azuread_user.my_user.user_principal_name
 
 note on pull requests
 I used 2 branches instead of 1 for this because I didnt know how to rename the first branch I made to

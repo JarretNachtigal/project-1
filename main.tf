@@ -14,10 +14,11 @@ terraform {
 
 # my user
 resource "azuread_user" "my_user" {
-  user_principal_name = "jarret.nachtigal@someemail.com"
-  display_name        = var.my_name
-  mail_nickname       = "jnachtigal"
-  password            = "SecretP@sswd99!"
+  user_principal_name   = "jarret.nachtigal@someemail.com"
+  display_name          = var.my_name
+  mail_nickname         = "jnachtigal"
+  password              = "SecretP@sswd99!"
+  force_password_change = true
   depends_on = [
     azurerm_resource_group.resource_group_1
   ]
