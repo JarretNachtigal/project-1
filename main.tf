@@ -11,3 +11,19 @@ terraform {
     }
   }
 }
+
+# my user
+resource "azuread_user" "my_user" {
+  user_principal_name = "jarret.nachtigal@someemail.com"
+  display_name        = "Jarret Nachtigal"
+  mail_nickname       = "jnachtigal"
+  password            = "SecretP@sswd99!"
+}
+
+# trainer's user
+resource "azuread_user" "trainer_user" {
+  user_principal_name = "ibrahim.ozbekler@someemail.com"
+  display_name        = "Ibrahim Ozbekler"
+  mail_nickname       = "iozbekler"
+  password            = "SecretP@sswd99!"
+}
